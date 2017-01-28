@@ -1,0 +1,1 @@
+copy %cd%\lib\glew32.dll %cd%\build\glew32.dll

@@ -3,7 +3,6 @@
 
 #include <stdio.h>
 #ifdef NANOVG_GLEW
-#define GLEW_STATIC
 #	include <GL/glew.h>
 #endif
 #ifdef __APPLE__
@@ -29,7 +28,7 @@ typedef enum {
     ST_BUTTON = 1,
     // radio button
     ST_RADIO = 2,
-    // progress slider
+    // progress slider 
     ST_SLIDER = 3,
     // column
     ST_COLUMN = 4,
@@ -113,13 +112,13 @@ void init(NVGcontext *vg) {
 }
 
 void testrect(NVGcontext *vg, UIrect rect) {
-#if 0
+#if 0    
     nvgBeginPath(vg);
     nvgRect(vg,rect.x+0.5,rect.y+0.5,rect.w-1,rect.h-1);
     nvgStrokeColor(vg,nvgRGBf(1,0,0));
     nvgStrokeWidth(vg,1);
-    nvgStroke(vg);
-#endif
+    nvgStroke(vg);    
+#endif    
 }
 
 
@@ -316,7 +315,7 @@ void demohandler(int item, UIevent event) {
 
 int button(int iconid, const char *label, UIhandler handler) {
     // create new ui item
-    int item = uiItem();
+    int item = uiItem(); 
     // set size of wiget; horizontal size is dynamic, vertical is fixed
     uiSetSize(item, 0, BND_WIDGET_HEIGHT);
     uiSetEvents(item, UI_BUTTON0_HOT_UP);
@@ -336,7 +335,7 @@ void checkhandler(int item, UIevent event) {
 
 int check(const char *label, int *option) {
     // create new ui item
-    int item = uiItem();
+    int item = uiItem(); 
     // set size of wiget; horizontal size is dynamic, vertical is fixed
     uiSetSize(item, 0, BND_WIDGET_HEIGHT);
     // attach event handler e.g. demohandler above
@@ -557,13 +556,13 @@ void draw_noodles(NVGcontext *vg, int x, int y) {
         "Hover", nvgRGBf(0.392f,0.392f,0.392f));
     bndNodeBackground(vg, x+w+240, y-50, 100, 200, BND_ACTIVE, BND_ICONID(6,3),
         "Active", nvgRGBf(0.392f,0.392f,0.392f));
-
+    
     for (int i = 0; i < 9; ++i) {
         int a = i%3;
         int b = i/3;
         bndNodeWire(vg, x, y+s*a, x+w, y+s*b, (BNDwidgetState)a, (BNDwidgetState)b);
     }
-
+    
     bndNodePort(vg, x, y, BND_DEFAULT, nvgRGBf(0.5f, 0.5f, 0.5f));
     bndNodePort(vg, x+w, y, BND_DEFAULT, nvgRGBf(0.5f, 0.5f, 0.5f));
     bndNodePort(vg, x, y+s, BND_HOVER, nvgRGBf(0.5f, 0.5f, 0.5f));
@@ -590,7 +589,7 @@ void draw_demostuff(NVGcontext *vg, int x, int y, float w, float h) {
     nvgTranslate(vg, x, y);
 
     bndSplitterWidgets(vg, 0, 0, w, h);
-
+    
     x = 10;
     y = 10;
 
@@ -599,10 +598,10 @@ void draw_demostuff(NVGcontext *vg, int x, int y, float w, float h) {
     y += 25;
     bndToolButton(vg,x,y,120,BND_WIDGET_HEIGHT,BND_CORNER_NONE,BND_HOVER,
         BND_ICONID(6,3),"Hovered");
-    y += 25;
+    y += 25;   
     bndToolButton(vg,x,y,120,BND_WIDGET_HEIGHT,BND_CORNER_NONE,BND_ACTIVE,
         BND_ICONID(6,3),"Active");
-
+    
     y += 40;
     bndRadioButton(vg,x,y,80,BND_WIDGET_HEIGHT,BND_CORNER_NONE,BND_DEFAULT,
         -1,"Default");
@@ -624,11 +623,11 @@ void draw_demostuff(NVGcontext *vg, int x, int y, float w, float h) {
     y += 25;
     bndChoiceButton(vg,x,y,80,BND_WIDGET_HEIGHT,BND_CORNER_NONE,BND_ACTIVE,
         -1, "Active");
-
+        
     y += 25;
     int ry = y;
     int rx = x;
-
+    
     y = 10;
     x += 130;
     bndOptionButton(vg,x,y,120,BND_WIDGET_HEIGHT,BND_DEFAULT,"Default");
@@ -661,7 +660,7 @@ void draw_demostuff(NVGcontext *vg, int x, int y, float w, float h) {
     my += BND_WIDGET_HEIGHT-2;
     bndMenuItem(vg,mx,my,mw,BND_WIDGET_HEIGHT,BND_ACTIVE,
         BND_ICONID(19,3),"Active");
-
+    
     y = 10;
     x += 130;
     int ox = x;
@@ -673,7 +672,7 @@ void draw_demostuff(NVGcontext *vg, int x, int y, float w, float h) {
     y += 25;
     bndNumberField(vg,x,y,120,BND_WIDGET_HEIGHT,BND_CORNER_NONE,BND_ACTIVE,
         "Active","100");
-
+    
     y += 40;
     bndRadioButton(vg,x,y,60,BND_WIDGET_HEIGHT,BND_CORNER_RIGHT,BND_DEFAULT,
         -1,"One");
@@ -686,12 +685,12 @@ void draw_demostuff(NVGcontext *vg, int x, int y, float w, float h) {
     x += 60-1;
     bndRadioButton(vg,x,y,60,BND_WIDGET_HEIGHT,BND_CORNER_LEFT,BND_ACTIVE,
         -1,"Butts");
-
+    
     x = ox;
     y += 40;
     float progress_value = fmodf(glfwGetTime()/10.0,1.0);
     char progress_label[32];
-    sprintf(progress_label, "%d%%", (int)(progress_value*100+0.5f));
+    sprintf(progress_label, "%d%%", int(progress_value*100+0.5f));
     bndSlider(vg,x,y,240,BND_WIDGET_HEIGHT,BND_CORNER_NONE,BND_DEFAULT,
         progress_value,"Default",progress_label);
     y += 25;
@@ -704,19 +703,19 @@ void draw_demostuff(NVGcontext *vg, int x, int y, float w, float h) {
     int rw = x+240-rx;
     float s_offset = sinf(glfwGetTime()/2.0)*0.5+0.5;
     float s_size = cosf(glfwGetTime()/3.11)*0.5+0.5;
-
+    
     bndScrollBar(vg,rx,ry,rw,BND_SCROLLBAR_HEIGHT,BND_DEFAULT,s_offset,s_size);
     ry += 20;
     bndScrollBar(vg,rx,ry,rw,BND_SCROLLBAR_HEIGHT,BND_HOVER,s_offset,s_size);
     ry += 20;
     bndScrollBar(vg,rx,ry,rw,BND_SCROLLBAR_HEIGHT,BND_ACTIVE,s_offset,s_size);
-
+    
     const char edit_text[] = "The quick brown fox";
     int textlen = strlen(edit_text)+1;
-    int t = (int)(glfwGetTime()*2);
+    int t = int(glfwGetTime()*2);
     int idx1 = (t/textlen)%textlen;
     int idx2 = idx1 + (t%(textlen-idx1));
-
+    
     ry += 25;
     bndTextField(vg,rx,ry,240,BND_WIDGET_HEIGHT,BND_CORNER_NONE,BND_DEFAULT,
         -1, edit_text, idx1, idx2);
@@ -726,9 +725,9 @@ void draw_demostuff(NVGcontext *vg, int x, int y, float w, float h) {
     ry += 25;
     bndTextField(vg,rx,ry,240,BND_WIDGET_HEIGHT,BND_CORNER_NONE,BND_ACTIVE,
         -1, edit_text, idx1, idx2);
-
+        
     draw_noodles(vg, 20, ry+50);
-
+    
     rx += rw + 20;
     ry = 10;
     bndScrollBar(vg,rx,ry,BND_SCROLLBAR_WIDTH,240,BND_DEFAULT,s_offset,s_size);
@@ -736,7 +735,7 @@ void draw_demostuff(NVGcontext *vg, int x, int y, float w, float h) {
     bndScrollBar(vg,rx,ry,BND_SCROLLBAR_WIDTH,240,BND_HOVER,s_offset,s_size);
     rx += 20;
     bndScrollBar(vg,rx,ry,BND_SCROLLBAR_WIDTH,240,BND_ACTIVE,s_offset,s_size);
-
+    
     x = ox;
     y += 40;
     bndToolButton(vg,x,y,BND_TOOL_WIDTH,BND_WIDGET_HEIGHT,BND_CORNER_RIGHT,
@@ -793,7 +792,7 @@ void build_democontent(int parent) {
     uiInsert(parent, col);
     uiSetMargins(col, 10, 10, 10, 10);
     uiSetLayout(col, UI_TOP|UI_HFILL);
-
+    
     column_append(col, button(BND_ICON_GHOST, "Item 1", demohandler));
     if (option3)
         column_append(col, button(BND_ICON_GHOST, "Item 2", demohandler));
@@ -806,7 +805,7 @@ void build_democontent(int parent) {
         uiSetMargins(hgroup_append_fixed(h, radio(BND_ICON_PLAY, NULL, &enum1)), -1,0,0,0);
         uiSetMargins(hgroup_append(h, radio(BND_ICON_GHOST, "Item 3.3", &enum1)), -1,0,0,0);
     }
-
+    
     {
         int rows = column_append(col, row());
         int coll = row_append(rows, vgroup());
@@ -822,7 +821,7 @@ void build_democontent(int parent) {
         vgroup_append(colr, slider("Item 4.1.0", &progress1));
         uiSetMargins(vgroup_append(colr, slider("Item 4.1.1", &progress2)),0,-2,0,0);
     }
-
+    
     column_append(col, button(BND_ICON_GHOST, "Item 5", NULL));
 
     static char textbuffer[1024] = "The quick brown fox.";
@@ -1117,7 +1116,7 @@ void draw(NVGcontext *vg, float w, float h) {
     uiEndLayout();
 
     drawUI(vg, 0, BND_CORNER_NONE);
-
+    
 #if 0
     for (int i = 0; i < uiGetLastItemCount(); ++i) {
         if (uiRecoverItem(i) == -1) {
@@ -1141,7 +1140,7 @@ void draw(NVGcontext *vg, float w, float h) {
             bndJoinAreaOverlay(vg, 0, 0, w, h, 1, (cursor.y > 0));
         }
     }
-
+    
     uiProcess((int)(glfwGetTime()*1000.0));
 }
 
@@ -1188,7 +1187,7 @@ int main()
 {
 	GLFWwindow* window;
     UIcontext *uictx;
-
+    
     uictx = uiCreateContext(4096, 1<<20);
     uiMakeCurrent(uictx);
     uiSetHandler(ui_handler);
@@ -1216,7 +1215,7 @@ int main()
 	glfwSetKeyCallback(window, key);
     glfwSetCharCallback(window, charevent);
     glfwSetCursorPosCallback(window, cursorpos);
-    glfwSetMouseButtonCallback(window, mousebutton);
+    glfwSetMouseButtonCallback(window, mousebutton);    
     glfwSetScrollCallback(window, scrollevent);
 
 	glfwMakeContextCurrent(window);
@@ -1236,7 +1235,7 @@ int main()
 		printf("Could not init nanovg.\n");
 		return -1;
 	}
-
+	
 	init(_vg);
 
     printf("sizeof(UIitem)=%lu\n", sizeof(UIitem));

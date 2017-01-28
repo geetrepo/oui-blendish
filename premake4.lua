@@ -8,10 +8,10 @@ solution "blendish"
 
 	project "example"
 		kind "ConsoleApp"
-		language "C"
-		files { "example.c", "nanovg/src/nanovg.c" }
+		language "C++"
+		files { "example.cpp", "nanovg/src/nanovg.c" }
 		includedirs { "nanovg/src" }
-		targetdir("build")		
+		targetdir("build")
 
 		configuration { "linux" }
 			 linkoptions { "`pkg-config --libs glfw3 --static`" }
@@ -19,7 +19,7 @@ solution "blendish"
 			 defines { "NANOVG_GLEW" }
 
 		configuration { "windows" }
-			 links { "glfw3", "gdi32", "winmm", "user32", "GLEW32", "glu32","opengl32" }
+			 links { "glfw3", "gdi32", "winmm", "user32", "GLEW", "glu32","opengl32" }
 			 defines { "NANOVG_GLEW" }
 
 		configuration { "macosx" }
@@ -32,5 +32,5 @@ solution "blendish"
 
 		configuration "Release"
 			defines { "NDEBUG" }
-			flags { "Optimize", "ExtraWarnings","StaticRuntime"}
+			flags { "Optimize", "ExtraWarnings"}
 

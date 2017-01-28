@@ -15,6 +15,3 @@ Here's a screenshot of Blendish styling a set of layouted OUI items (also contai
 Here's a shot of all available Blendish theming functions:
 
 ![blendish2.png](https://bitbucket.org/repo/zAzpBG/images/1457969701-blendish2.png)
-
-Forked from https://bitbucket.org/DarkUranium/oui-blendish to work with C. 
-Blendish Project by Leonard Ritter @paniq at https://bitbucket.org/duangle/oui-blendish

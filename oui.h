@@ -767,12 +767,7 @@ OUI_EXPORT int uiGetLastItemCount();
     #define UI_INLINE
     #endif
 #else
-    #if defined(__cplusplus) || __STDC_VERSION__ < 199901L
     #define UI_INLINE inline
-    #else
-    // C99 defines `inline` differently
-    #define UI_INLINE
-    #endif
 #endif
 
 #define UI_MAX_KIND 16
@@ -1040,7 +1035,7 @@ int uiGetLastButton(int button) {
     return (ui_context->last_buttons & (1ull<<button))?1:0;
 }
 
-int uiGetButton(unsigned int button) {
+int uiGetButton(int button) {
     assert(ui_context);
     return (ui_context->buttons & (1ull<<button))?1:0;
 }

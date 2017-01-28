@@ -29,11 +29,6 @@ THE SOFTWARE.
 #error "nanovg.h must be included first."
 #endif
 
-/* before C++11, stdbool.h does not exist, and we don't need it anyways in C++ */
-#ifndef __cplusplus
-#include <stdbool.h>
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -1143,12 +1138,7 @@ static double bnd_fmax ( double a, double b )
 }
 
 #else
-    #if defined(__cplusplus) || __STDC_VERSION__ < 199901L
     #define BND_INLINE inline
-    #else
-    // C99 defines `inline` differently
-    #define BND_INLINE
-    #endif
     #define bnd_fminf(a, b) fminf(a, b)
     #define bnd_fmaxf(a, b) fmaxf(a, b)
     #define bnd_fmin(a, b) fmin(a, b)
@@ -1933,7 +1923,7 @@ float bndLabelHeight(NVGcontext *ctx, int iconid, const char *label, float width
         nvgFontSize(ctx, BND_LABEL_FONT_SIZE);
         float bounds[4];
         nvgTextBoxBounds(ctx, 1, 1, width, label, NULL, bounds);
-        int bh = (int)(bounds[3] - bounds[1]) + BND_TEXT_PAD_DOWN;
+        int bh = int(bounds[3] - bounds[1]) + BND_TEXT_PAD_DOWN;
         if (bh > h)
         	h = bh;
     }
